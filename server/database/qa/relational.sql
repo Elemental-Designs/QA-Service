@@ -1,11 +1,7 @@
-CREATE DATABASE qa;
-
-USE qa;
-
 CREATE TABLE product (
   id INT PRIMARY KEY,
   UNIQUE(id)
-)
+);
 
 CREATE TABLE question (
   id INT PRIMARY KEY NOT NULL,
@@ -19,7 +15,7 @@ CREATE TABLE question (
   CONSTRAINT fk_product
     FOREIGN KEY(product_id)
       REFERENCES product(id)
-)
+);
 
 CREATE TABLE answers (
   id INT PRIMARY KEY NOT NULL,
@@ -33,9 +29,8 @@ CREATE TABLE answers (
   CONSTRAINT fk_question
     FOREIGN KEY(question_id)
       REFERENCES question(id)
-)
+);
 
--- CREATE A TABLE OR JUST ADD IT TO ANSWERS TABLE
 CREATE TABLE answers_photo (
   id INT PRIMARY KEY NOT NULL,
   answer_id INT NOT NULL,
@@ -43,4 +38,4 @@ CREATE TABLE answers_photo (
   CONSTRAINT fk_answer
     FOREIGN KEY(answer_id)
       REFERENCES answer(id)
-)
+);
