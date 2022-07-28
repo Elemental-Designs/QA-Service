@@ -3,7 +3,7 @@ CREATE TABLE product (
   UNIQUE(id)
 );
 
-CREATE TABLE question (
+CREATE TABLE questions (
   id INT PRIMARY KEY NOT NULL,
   product_id INT NOT NULL,
   body VARCHAR(255) NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE question (
 
 CREATE TABLE answers (
   id INT PRIMARY KEY NOT NULL,
-  question_id INT NOT NULL,
+  questions_id INT NOT NULL,
   body VARCHAR(255) NOT NULL,
   date_written DATE NOT NULL,
   answer_name VARCHAR(100) NOT NULL,
@@ -27,15 +27,15 @@ CREATE TABLE answers (
   reported BOOLEAN,
   helpful INT NOT NULL,
   CONSTRAINT fk_question
-    FOREIGN KEY(question_id)
-      REFERENCES question(id)
+    FOREIGN KEY(questions_id)
+      REFERENCES questions(id)
 );
 
 CREATE TABLE answers_photo (
   id INT PRIMARY KEY NOT NULL,
-  answer_id INT NOT NULL,
+  answers_id INT NOT NULL,
   url VARCHAR(150),
-  CONSTRAINT fk_answer
-    FOREIGN KEY(answer_id)
-      REFERENCES answer(id)
+  CONSTRAINT fk_answers
+    FOREIGN KEY(answers_id)
+      REFERENCES answers(id)
 );
