@@ -10,34 +10,33 @@ CREATE TABLE product (
 CREATE TABLE question (
   id INT PRIMARY KEY NOT NULL,
   product_id INT NOT NULL,
-  question_body VARCHAR(255) NOT NULL,
-  question_date DATE NOT NULL,
-  asker_email VARCHAR(50) NOT NULL,
+  body VARCHAR(255) NOT NULL,
+  date_written DATE NOT NULL,
   asker_name VARCHAR(100) NOT NULL,
-  question_helpfulness INT NOT NULL,
-  question_reported BOOLEAN,
+  asker_email VARCHAR(50) NOT NULL,
+  question BOOLEAN,
+  helpful INT NOT NULL,
   CONSTRAINT fk_product
     FOREIGN KEY(product_id)
       REFERENCES product(id)
 )
 
-CREATE TABLE answer (
+CREATE TABLE answers (
   id INT PRIMARY KEY NOT NULL,
   question_id INT NOT NULL,
-  answer_body VARCHAR(255) NOT NULL,
-  answer_date DATE NOT NULL,
-  answer_email VARCHAR(50) NOT NULL,
+  body VARCHAR(255) NOT NULL,
+  date_written DATE NOT NULL,
   answer_name VARCHAR(100) NOT NULL,
-  answer_helpfulness INT NOT NULL,
-  answer_reported BOOLEAN,
+  answer_email VARCHAR(50) NOT NULL,
+  reported BOOLEAN,
+  helpful INT NOT NULL,
   CONSTRAINT fk_question
     FOREIGN KEY(question_id)
       REFERENCES question(id)
 )
 
-
 -- CREATE A TABLE OR JUST ADD IT TO ANSWERS TABLE
-CREATE TABLE photo (
+CREATE TABLE answers_photo (
   id INT PRIMARY KEY NOT NULL,
   answer_id INT NOT NULL,
   url VARCHAR(150),
