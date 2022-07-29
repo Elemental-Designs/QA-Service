@@ -44,7 +44,7 @@ CREATE TABLE answers (
       REFERENCES questions(id)
 );
 
-CREATE TABLE answers_photo (
+CREATE TABLE answers_photos (
   id INTEGER PRIMARY KEY NOT NULL,
   answers_id INTEGER NOT NULL,
   url VARCHAR(150),
@@ -62,8 +62,5 @@ FROM temp;
 DROP TABLE temp;
 
 \COPY questions FROM 'qa_csv/questions.csv' DELIMITER ',' CSV HEADER;
-SELECT COUNT(*) FROM questions;
 \COPY answers FROM 'qa_csv/answers.csv' DELIMITER ',' CSV HEADER;
-SELECT COUNT(*) FROM answers;
-\COPY answers_photo FROM 'qa_csv/answers_photo.csv' DELIMITER ',' CSV HEADER;
-SELECT COUNT(*) FROM answers_photo;
+\COPY answers_photos FROM 'qa_csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
