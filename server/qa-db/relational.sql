@@ -1,4 +1,4 @@
-DROP TABLE product, questions, answers, answers_photo
+DROP TABLE product, questions, answers, answers_photo;
 
 CREATE TABLE temp (
   id INTEGER PRIMARY KEY,
@@ -61,5 +61,9 @@ FROM temp;
 
 DROP TABLE temp;
 
-\COPY questions 'qa_csv/questions.csv' DELIMITER ',' CSV HEADER;
+\COPY questions FROM 'qa_csv/questions.csv' DELIMITER ',' CSV HEADER;
 SELECT COUNT(*) FROM questions;
+\COPY answers FROM 'qa_csv/answers.csv' DELIMITER ',' CSV HEADER;
+SELECT COUNT(*) FROM answers;
+\COPY answers_photo FROM 'qa_csv/answers_photo.csv' DELIMITER ',' CSV HEADER;
+SELECT COUNT(*) FROM answers_photo;
