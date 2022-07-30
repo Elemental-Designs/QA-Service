@@ -8,7 +8,8 @@ const app = express();
 app.use(express.json());
 
 // set up routers
-app.use('/qa', qaRouter);
+app.use('/qa/questions', qaRouter);
+app.use('/qa/answers', qaRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
