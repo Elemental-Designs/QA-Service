@@ -7,8 +7,17 @@ module.exports = {
   // =====================================================
 
   // get list of questions (/questions)
-  getQuestions: (req,res) => {
-    console.log('hello');
+  getQuestions(req, res) {
+    let params = {
+      product_id: req.params.product_id,
+      page: req.params.page || 1,
+      count: req.params.count || 5,
+    }
+
+    models.readQuestions(params)
+    .then(results => {
+      console.log(results.rows)
+    })
   },
   /*
     parameters:
@@ -71,13 +80,13 @@ module.exports = {
     qeustions_id (requeired to update question)
   */
 
-  // PUT/UPDATE mark the answer as helpful (/questions/:question_id/helpful)
+  // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
   /*
     parameters:
     qeustions_id (requeired to update question)
   */
 
-  // PUT/UPDATE mark the answer as reported (/questions/:question_id/report)
+  // PUT/UPDATE mark the answer as reported (/questions/:answer_id/report)
   /*
     parameters:
     qeustions_id (requeired to update question)
