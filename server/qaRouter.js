@@ -7,12 +7,14 @@ let qaControllers = require('./controllers/qa.js');
 // =====================================================
 
 // get list of questions (/questions)
+
 /*
   parameters:
   product_id(specifies whic product to get questions),
   page(select how many pages default 1),
   count(how many results per page default 5)
 */
+
 
 // get list of answers from specific question (:question_id/answers)
 /*
