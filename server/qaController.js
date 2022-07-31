@@ -1,5 +1,9 @@
-const models = require('../models/qa.js');
+const {
+  readQuestions
+} = require('./qaModel.js');
 
+const handleResponse = (res, data, code) => res.status(code).send(data);
+const handleError = (res, err) => res.status(500).send(err);
 
 module.exports = {
   // =====================================================
@@ -7,27 +11,29 @@ module.exports = {
   // =====================================================
 
   // get list of questions (/questions)
-  getQuestions(req, res) {
-    let params = {
-      product_id: req.params.product_id,
-      page: req.params.page || 1,
-      count: req.params.count || 5,
-    }
-
-    models.readQuestions(params)
-    .then(results => {
-      console.log(results.rows)
-    })
-  },
   /*
     parameters:
     product_id(specifies whic product to get questions),
     page(select how many pages default 1),
     count(how many results per page default 5)
   */
+  getQuestions(req, res) {
+    let params = {
+      product_id: req.params.product_id || 1,
+      page: req.params.page || 1,
+      count: req.params.count || 5,
+    }
+
+    readQuestions(params)
+    .then(results => handleResponse(res, results.rows, 200))
+    .catch(err => handleError(res, err));
+  },
 
 
   // get list of answers from specific question (:question_id/answers)
+  getAnswers(req, res) {
+
+  },
   /*
     parameters:
     question_id
@@ -43,6 +49,9 @@ module.exports = {
 
 
   // post question for product (/questions)
+  postQuestion(req, res) {
+
+  },
   /*
     body parameters:
     body: (text: question being asked)
@@ -52,6 +61,9 @@ module.exports = {
   */
 
   // post ansewr for specific question (/questions/:question_id/answers)
+  postAnswer(req, res) {
+
+  },
   /*
     parameters:
     question_id
@@ -69,24 +81,36 @@ module.exports = {
 
 
   // PUT/UPDATE mark the question as helpful (/questions/:question_id/helpful)
+  markQuestionHelpful(req, res) {
+
+  },
   /*
     parameters:
     qeustions_id (requeired to update question)
   */
 
   // PUT/UPDATE mark the question as reported (/questions/:question_id/report)
+  reportQuestion(req, res) {
+
+  },
   /*
     parameters:
     qeustions_id (requeired to update question)
   */
 
   // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
+  markAnswerHelpful(req, res) {
+
+  },
   /*
     parameters:
     qeustions_id (requeired to update question)
   */
 
   // PUT/UPDATE mark the answer as reported (/questions/:answer_id/report)
+  reportAnswer(req, res) {
+
+  }
   /*
     parameters:
     qeustions_id (requeired to update question)
