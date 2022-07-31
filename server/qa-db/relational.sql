@@ -1,4 +1,4 @@
-DROP TABLE product, questions, answers, answers_photo;
+DROP TABLE product, questions, answers, answers_photos;
 
 CREATE TABLE temp (
   id INTEGER PRIMARY KEY,
