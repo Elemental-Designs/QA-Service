@@ -1,5 +1,12 @@
 const {
-  readQuestions
+  readQuestions,
+  readAnswers,
+  insertQuestion,
+  insertAnswer,
+  updateQuestionHelpful,
+  updateReportQuestion,
+  updateAnswerHelpful,
+  updateReportAnswer
 } = require('./qaModel.js');
 
 const handleResponse = (res, data, code) => res.status(code).send(data);
@@ -72,17 +79,15 @@ module.exports = {
     count(how many results per page default 5)
   */
 
-
-
-
   // =====================================================
   // status below will always be 204 no content
   // =====================================================
 
-
   // PUT/UPDATE mark the question as helpful (/questions/:question_id/helpful)
   markQuestionHelpful(req, res) {
-
+    updateQuestionHelpful(req.params.question_id)
+      .then(result => handleResponse(res, null, 204))
+      .catch(err => handleError(res, err));
   },
   /*
     parameters:
@@ -91,7 +96,9 @@ module.exports = {
 
   // PUT/UPDATE mark the question as reported (/questions/:question_id/report)
   reportQuestion(req, res) {
-
+    updateReportQuestion(req.params.question_id)
+      .then(result => handleResponse(res, null, 204))
+      .catch(err => handleError(res, err));
   },
   /*
     parameters:
@@ -100,19 +107,23 @@ module.exports = {
 
   // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
   markAnswerHelpful(req, res) {
-
+    updateAnswerHelpful(req.params.answer_id)
+      .then(result => handleResponse(res, null, 204))
+      .catch(err => handleError(res, err));
   },
   /*
     parameters:
-    qeustions_id (requeired to update question)
+    answer_id (requeired to update answer)
   */
 
   // PUT/UPDATE mark the answer as reported (/questions/:answer_id/report)
   reportAnswer(req, res) {
-
+    updateReportAnswer(req.params.answer_id)
+      .then(result => handleResponse(res, null, 204))
+      .catch(err => handleError(res, err));
   }
   /*
     parameters:
-    qeustions_id (requeired to update question)
+    answer_id (requeired to update answer)
   */
 }
