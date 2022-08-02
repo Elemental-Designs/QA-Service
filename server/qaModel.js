@@ -6,42 +6,52 @@ module.exports = {
     const text = `
       SELECT product_id,
       (
-        json_agg
+        coalesce
         (
-          json_build_object
+          json_agg
           (
-            'id', q.id,
-            'body', q.body,
-            'date', (SELECT TO_CHAR(to_timestamp(q.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
-            'asker_name', q.asker_name,
-            'question_helpfulness', q.helpful,
-            'reported', q.reported,
-            'answers',
+            json_build_object
             (
-              SELECT json_object_agg
+              'id', q.id,
+              'body', q.body,
+              'date', (SELECT TO_CHAR(to_timestamp(q.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+              'asker_name', q.asker_name,
+              'question_helpfulness', q.helpful,
+              'reported', q.reported,
+              'answers',
               (
-                id, json_build_object
+                coalesce
                 (
-                  'id', a.id,
-                  'body', a.body,
-                  'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
-                  'answerer', a.answer_name,
-                  'helpfulness', a.helpful,
-                  'photos',
                   (
-                    SELECT coalesce
+                    SELECT json_object_agg
                     (
-                      json_agg(ap.url),'[]'
+                      id, json_build_object
+                      (
+                        'id', a.id,
+                        'body', a.body,
+                        'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+                        'answerer', a.answer_name,
+                        'helpfulness', a.helpful,
+                        'photos',
+                        (
+                          SELECT coalesce
+                          (
+                            json_agg(ap.url),'[]'
+                          )
+                          FROM answers_photos AS ap
+                          WHERE ap.answers_id = a.id
+                        )
+                      )
                     )
-                    FROM answers_photos AS ap
-                    WHERE ap.answers_id = a.id
+                    FROM answers AS a
+                    WHERE a.questions_id = q.id
                   )
+                  ,'{}'
                 )
               )
-              FROM answers AS a
-              WHERE a.questions_id = q.id
             )
           )
+          ,'[]'
         )
       ) AS results
       FROM questions AS q
@@ -60,32 +70,35 @@ module.exports = {
     const text = `
       SELECT questions_id, $2 AS page, $3 AS count,
       (
-        json_agg
+        coalesce
         (
-          json_build_object
+          json_agg
           (
-            'answer_id', a.id,
-            'body', a.body,
-            'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
-            'answerer_name', a.answer_name,
-            'helpfulness', a.helpful,
-            'photos',
+            json_build_object
             (
-              SELECT coalesce
+              'answer_id', a.id,
+              'body', a.body,
+              'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+              'answerer_name', a.answer_name,
+              'helpfulness', a.helpful,
+              'photos',
               (
-                json_agg
+                SELECT coalesce
                 (
-                  json_build_object
+                  json_agg
                   (
-                    'id', ap.id,
-                    'url', ap.url
-                  )
-                ), '[]'
+                    json_build_object
+                    (
+                      'id', ap.id,
+                      'url', ap.url
+                    )
+                  ), '[]'
+                )
+                FROM answers_photos AS ap
+                WHERE ap.answers_id = a.id
               )
-              FROM answers_photos AS ap
-              WHERE ap.answers_id = a.id
             )
-          )
+          ) , '[]'
         )
       ) AS results
       FROM answers AS a

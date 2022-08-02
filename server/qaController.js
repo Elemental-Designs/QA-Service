@@ -38,7 +38,10 @@ module.exports = {
       count: req.query.count || 5
     }
     readAnswers(params)
-      .then(({rows}) => handleResponse(res, rows[0], 200))
+      .then(({rows}) => {
+        if (!rows[0]) rows[0] = {}
+        handleResponse(res, rows[0], 200)
+      })
       .catch(err => handleError(res, err));
   },
 
