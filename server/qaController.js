@@ -16,29 +16,34 @@ module.exports = {
 
   // get list of questions (/questions)
   getQuestions(req, res) {
+    if (!req.query.product_id) handleError(res, 'invalid product_id')
     console.log(req.query);
     let params = {
       product_id: req.query.product_id,
       page: req.params.page || 1,
-      count: req.params.count || 5,
+      count: req.params.count || 10,
     }
     readQuestions(params)
     .then(({rows})=> handleResponse(res, rows[0], 200))
-    .catch(err => handleError(res, err));
+    .catch(err => console.log(err));
   },
 
   // get list of answers from specific question (:question_id/answers)
   getAnswers(req, res) {
+    if (!req.params.question_id) handleError(res, 'invalid question_id')
     let params = {
       question_id: req.params.question_id,
       page: req.query.page || 1,
-      count: req.qeury.count || 5
+      count: req.query.count || 5
     }
     readAnswers(params)
+      .then(({rows}) => handleResponse(res, rows[0], 200))
+      .catch(err => handleError(res, err));
   },
 
   // post question for product (/questions)
   postQuestion(req, res) {
+    if (!req.body.product_id) handleError(res, 'invalid product_id')
     // get date and add to req body
     insertQuestion(req.body)
       .then(result => handleResponse(res, null, 201))
@@ -47,9 +52,11 @@ module.exports = {
 
   // post ansewr for specific question (/questions/:question_id/answers)
   postAnswer(req, res) {
+    if (!req.params.question_id) handleError(res, 'invalid question_id')
     let params = {
       ...req.body,
-      ...req.params
+      ...req.params,
+      ...req.query
     }
     insertAnswer(params)
       .then(result => handleResponse(res, null, 201))
@@ -58,6 +65,7 @@ module.exports = {
 
   // PUT/UPDATE mark the question as helpful (/questions/:question_id/helpful)
   markQuestionHelpful(req, res) {
+    if (!req.params.question_id) handleError(res, 'invalid question_id')
     updateQuestionHelpful(req.params.question_id)
       .then(result => handleResponse(res, null, 204))
       .catch(err => handleError(res, err));
@@ -65,6 +73,7 @@ module.exports = {
 
   // PUT/UPDATE mark the question as reported (/questions/:question_id/report)
   reportQuestion(req, res) {
+    if (!req.params.question_id) handleError(res, 'invalid question_id')
     updateReportQuestion(req.params.question_id)
       .then(result => handleResponse(res, null, 204))
       .catch(err => handleError(res, err));
@@ -72,6 +81,7 @@ module.exports = {
 
   // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
   markAnswerHelpful(req, res) {
+    if (!req.params.answer_id) handleError(res, 'invalid answer_id')
     updateAnswerHelpful(req.params.answer_id)
       .then(result => handleResponse(res, null, 204))
       .catch(err => handleError(res, err));
@@ -79,6 +89,7 @@ module.exports = {
 
   // PUT/UPDATE mark the answer as reported (/questions/:answer_id/report)
   reportAnswer(req, res) {
+    if (!req.params.answer_id) handleError(res, 'invalid answer_id')
     updateReportAnswer(req.params.answer_id)
       .then(result => handleResponse(res, null, 204))
       .catch(err => handleError(res, err));
