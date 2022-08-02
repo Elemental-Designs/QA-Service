@@ -91,7 +91,6 @@ module.exports = {
       FROM answers AS a
       WHERE a.questions_id = $1
       GROUP BY 1
-
     `;
     const offset = (parseInt(page) - 1) * parseInt(count);
     const values = [question_id, page, count,];
@@ -99,12 +98,12 @@ module.exports = {
   },
 
 
-  insertQuestion({product_id, body, name, email}) {
+  insertQuestion({product_id, body, date, name, email}) {
     const text =`
       INSERT INTO questions(product_id, body, date_written, asker_name, asker_email)
       VALUES($1, $2, $3, $4, $5)
     `;
-    const values = [product_id, body, /* get date */, name, email];
+    const values = [product_id, body, date, name, email];
     return query(text, values);
   },
 
@@ -114,7 +113,7 @@ module.exports = {
       INSERT INTO answers(question_id, body, date_written, answer_name, answer_email)
       RETURNING id
     `;
-    const values = [question_id, body, /* get date */, name, email];
+    const values = [question_id, body, date, name, email];
     const photoText = `INSERT INTO answers_photo(answers_id, url) VALUES ($1, $2)`
     return query(text, values)
       .then((id) => query(photoText, [photos]))
