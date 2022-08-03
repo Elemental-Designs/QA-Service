@@ -15,6 +15,7 @@
 
 > Service to store and retrieve Questions & Answers data
 
+<!-- <img src="/repo/qaDiagram.png" alt="drawing" width="90%"/> -->
 
 ![Service Diagram](/repo/qaDiagram.png)
 
