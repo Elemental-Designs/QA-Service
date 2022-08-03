@@ -12,7 +12,12 @@
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
 
 ## Project Overview
-Service to store and Questions & Answers data
+
+> Service to store and retrieve Questions & Answers data
+
+<!-- <img src="/repo/qaDiagram.png" alt="drawing" width="90%"/> -->
+
+![Service Diagram](/repo/qaDiagram.png)
 
 ***
 
