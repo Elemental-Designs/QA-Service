@@ -29,10 +29,10 @@ qaRouter.put('/:question_id/helpful', markQuestionHelpful)
 qaRouter.put('/:question_id/report', reportQuestion)
 
 // put the answer as helpful (/questions/:answer_id/helpful)
-qaRouter.put('/:answer_id/helpful', markAnswerHelpful)
+qaRouter.put('/answers/:answer_id/helpful', markAnswerHelpful)
 
 // put the answer as reported (/questions/:answer_id/report)
-qaRouter.put('/:answer_id/report', reportAnswer)
+qaRouter.put('/answers/:answer_id/report', reportAnswer)
 
 
 module.exports = qaRouter;

@@ -155,6 +155,7 @@ module.exports = {
   },
 
   updateAnswerHelpful(id) {
+    console.log('hi');
     const text =`UPDATE answers SET helpful = helpful + 1 WHERE id = $1`;
     return query(text, [id]);
   },

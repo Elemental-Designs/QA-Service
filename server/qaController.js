@@ -93,6 +93,7 @@ module.exports = {
   // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
   markAnswerHelpful(req, res) {
     if (!req.params.answer_id) handleError(res, 'invalid answer_id')
+    console.log(req.params)
 
     updateAnswerHelpful(req.params.answer_id)
       .then(handleResponse(res, null, 204))
