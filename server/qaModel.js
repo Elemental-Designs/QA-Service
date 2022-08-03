@@ -3,9 +3,10 @@ const query = require('./qa-db');
 module.exports = {
 
   readQuestions({ product_id, page, count }) {
+    console.log(count);
     const text = `
       SELECT product_id,
-      (
+        (
         coalesce
         (
           json_agg
@@ -56,11 +57,12 @@ module.exports = {
       ) AS results
       FROM questions AS q
       WHERE q.product_id = $1
+      AND q.reported = false
       GROUP BY 1
       OFFSET $2
       LIMIT $3
     `;
-    const offset = Number(page) * Number(count) - count;
+    const offset = count * (page - 1);
     const values = [product_id, offset, count];
     return query(text, values);
   },
