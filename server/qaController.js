@@ -102,7 +102,7 @@ module.exports = {
 
   // PUT/UPDATE mark the answer as reported (/questions/:answer_id/report)
   reportAnswer(req, res) {
-    if (!req.params.answer_id) handleError(res, 'invalid answer_id')
+    if (!req.params.answer_id) handleError(res, 'invalid answer_id');
 
     updateReportAnswer(req.params.answer_id)
       .then(handleResponse(res, null, 204))
