@@ -23,9 +23,10 @@ module.exports = {
       page: req.query.page || 1,
       count: req.query.count || 5,
     }
+
     readQuestions(params)
     .then(({rows})=> handleResponse(res, rows[0], 200))
-    .catch(err => console.log(err));
+    .catch(err => handleError(res, err));
   },
 
   // get list of answers from specific question (:question_id/answers)
@@ -37,6 +38,7 @@ module.exports = {
       page: req.query.page || 1,
       count: req.query.count || 5
     }
+
     readAnswers(params)
       .then(({rows}) => {
         if (!rows[0]) rows[0] = {}
@@ -53,6 +55,7 @@ module.exports = {
       ...req.body,
       date: Date.now()
     }
+
     insertQuestion(params)
       .then(results => handleResponse(res, null, 201))
       .catch(err => handleError(res, err));
@@ -67,6 +70,7 @@ module.exports = {
       question_id: req.params.question_id,
       date: Date.now()
     }
+
     insertAnswer(params)
       .then(results => handleResponse(res, null, 201))
       .catch(err => handleError(res, err));
@@ -93,7 +97,6 @@ module.exports = {
   // PUT/UPDATE mark the answer as helpful (/questions/:answer_id/helpful)
   markAnswerHelpful(req, res) {
     if (!req.params.answer_id) handleError(res, 'invalid answer_id')
-    console.log(req.params)
 
     updateAnswerHelpful(req.params.answer_id)
       .then(handleResponse(res, null, 204))

@@ -1,5 +1,5 @@
-let qaRouter = require('express').Router();
-let {
+const qaRouter = require('express').Router();
+const {
   getQuestions,
   getAnswers,
   postQuestion,

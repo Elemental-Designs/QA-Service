@@ -1,9 +1,8 @@
-const query = require('./qa-db');
+const query = require('../qa-db');
 
 module.exports = {
 
   readQuestions({ product_id, page, count }) {
-    console.log(count);
     const text = `
       SELECT product_id,
         (
@@ -62,12 +61,12 @@ module.exports = {
       OFFSET $2
       LIMIT $3
     `;
-    const offset = count * (page - 1);
+    const offset = (Number(page) - 1) * Number(count);
     const values = [product_id, offset, count];
     return query(text, values);
   },
 
-  readAnswers({question_id, page, count}){
+  readAnswers({ question_id, page, count }){
     console.log('read q')
     const text = `
       SELECT questions_id, $2 AS page, $3 AS count,
@@ -106,14 +105,16 @@ module.exports = {
       FROM answers AS a
       WHERE a.questions_id = $1
       GROUP BY 1
+      OFFSET $2
+      LIMIT $3
     `;
-    const offset = (parseInt(page) - 1) * parseInt(count);
-    const values = [question_id, page, count,];
+    const offset = (Number(page) - 1) * Number(count);
+    const values = [question_id, offset, count];
     return query(text, values);
   },
 
 
-  insertQuestion({product_id, body, date, name, email}) {
+  insertQuestion({ product_id, body, date, name, email }) {
     console.log(product_id, body, date, name, email)
     const text =`
       INSERT INTO questions(id, product_id, body, date_written, asker_name, asker_email)
@@ -124,7 +125,7 @@ module.exports = {
   },
 
 
-  insertAnswer({question_id, body, date, name, email, photos}) {
+  insertAnswer({ question_id, body, date, name, email, photos }) {
     const text =`
       INSERT INTO answers(id, questions_id, body, date_written, answer_name, answer_email)
       VALUES((SELECT max(id + 1) from answers), $1, $2, $3, $4, $5)
