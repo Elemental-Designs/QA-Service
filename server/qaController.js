@@ -51,11 +51,10 @@ module.exports = {
 
     let params = {
       ...req.body,
-      date: 'get date'
+      date: Date.now()
     }
-
     insertQuestion(params)
-      .then(handleResponse(res, null, 201))
+      .then(results => handleResponse(res, null, 201))
       .catch(err => handleError(res, err));
   },
 
@@ -66,11 +65,10 @@ module.exports = {
     let params = {
       ...req.body,
       question_id: req.params.question_id,
-      date: 'get date'
+      date: Date.now()
     }
-
     insertAnswer(params)
-      .then(handleResponse(res, null, 201))
+      .then(results => handleResponse(res, null, 201))
       .catch(err => handleError(res, err));
   },
 
