@@ -28,7 +28,7 @@
 ## Questions & Answers Service
 
 
-<details><summary><b>Main Image Slide & Mini Carousel</b></summary>
+<details><summary><b>Optimizations</b></summary>
 
 <br/>
 
