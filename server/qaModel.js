@@ -2,59 +2,117 @@ const query = require('../qa-db');
 
 module.exports = {
 
+  /* terminal query
+  SELECT product_id, (coalesce(json_agg(json_build_object(
+    'id', q.id,
+    'body', q.body,
+    'date', (SELECT TO_CHAR(to_timestamp(q.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+    'asker_name', q.asker_name,
+    'question_helpfulness', q.helpful,
+    'reported', q.reported,
+    'answers',(
+      coalesce((SELECT json_object_agg(
+            id, json_build_object(
+              'id', a.id,
+              'body', a.body,
+              'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+              'answerer', a.answer_name,
+              'helpfulness', a.helpful,
+              'photos',(
+                SELECT coalesce(json_agg(ap.url),'[]')
+                FROM answers_photos AS ap
+                WHERE ap.answers_id = a.id)))
+          FROM answers AS a
+          WHERE a.questions_id = q.id)
+        ,'{}'))))
+    ,'[]' )) AS results
+  FROM questions AS q
+  WHERE q.product_id = 1
+  AND q.reported = false
+  GROUP BY 1
+  OFFSET 0
+  LIMIT 5
+  */
   readQuestions({ product_id, page, count }) {
     console.log('hi');
     const text = `
-      SELECT product_id,
-        (
-        coalesce(
-          json_agg(
-            json_build_object(
-              'id', q.id,
-              'body', q.body,
-              'date', (SELECT TO_CHAR(to_timestamp(q.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
-              'asker_name', q.asker_name,
-              'question_helpfulness', q.helpful,
-              'reported', q.reported,
-              'answers',(
-                coalesce(
-                  (
-                    SELECT json_object_agg(
-                      id, json_build_object(
-                        'id', a.id,
-                        'body', a.body,
-                        'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
-                        'answerer', a.answer_name,
-                        'helpfulness', a.helpful,
-                        'photos',(
-                          SELECT coalesce(json_agg(ap.url),'[]')
-                          FROM answers_photos AS ap
-                          WHERE ap.answers_id = a.id
-                        )
+    SELECT product_id,
+      (
+      coalesce(
+        json_agg(
+          json_build_object(
+            'id', q.id,
+            'body', q.body,
+            'date', (SELECT TO_CHAR(to_timestamp(q.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+            'asker_name', q.asker_name,
+            'question_helpfulness', q.helpful,
+            'reported', q.reported,
+            'answers',(
+              coalesce(
+                (
+                  SELECT json_object_agg(
+                    id, json_build_object(
+                      'id', a.id,
+                      'body', a.body,
+                      'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+                      'answerer', a.answer_name,
+                      'helpfulness', a.helpful,
+                      'photos',(
+                        SELECT coalesce(json_agg(ap.url),'[]')
+                        FROM answers_photos AS ap
+                        WHERE ap.answers_id = a.id
                       )
                     )
-                    FROM answers AS a
-                    WHERE a.questions_id = q.id
                   )
-                  ,'{}'
+                  FROM answers AS a
+                  WHERE a.questions_id = q.id
                 )
+                ,'{}'
               )
             )
           )
-          ,'[]'
         )
-      ) AS results
-      FROM questions AS q
-      WHERE q.product_id = $1
-      AND q.reported = false
-      GROUP BY 1
-      OFFSET $2
-      LIMIT $3
+        ,'[]'
+      )
+    ) AS results
+    FROM questions AS q
+    WHERE q.product_id = $1
+    AND q.reported = false
+    GROUP BY 1
+    OFFSET $2
+    LIMIT $3
     `;
     const offset = (Number(page) - 1) * Number(count);
     const values = [product_id, offset, count];
     return query(text, values);
   },
+
+  /* terminal query
+    SELECT questions_id, 0 AS page, 5 AS count,
+      (coalesce(json_agg(
+        json_build_object (
+          'answer_id', a.id,
+          'body', a.body,
+          'date', (SELECT TO_CHAR(to_timestamp(a.date_written / 1000), 'YYYY-MM-DD"T"HH24:MI:SS:000"Z"')),
+          'answerer_name', a.answer_name,
+          'helpfulness', a.helpful,
+          'photos', (SELECT coalesce
+            (json_agg (
+                json_build_object (
+                  'id', ap.id,
+                  'url', ap.url
+                )
+              ), '[]')
+            FROM answers_photos AS ap
+            WHERE ap.answers_id = a.id
+          )
+        )
+        ) , '[]')
+    ) AS results
+    FROM answers AS a
+    WHERE a.questions_id = 1
+    GROUP BY 1
+  */
 
   readAnswers({ question_id, page, count }){
     const text = `
