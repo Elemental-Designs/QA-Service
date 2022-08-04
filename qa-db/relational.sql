@@ -64,3 +64,5 @@ CREATE TABLE answers_photos (
 \COPY questions FROM 'qa_csv/questions.csv' DELIMITER ',' CSV HEADER;
 \COPY answers FROM 'qa_csv/answers.csv' DELIMITER ',' CSV HEADER;
 \COPY answers_photos FROM 'qa_csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
+
+CREATE INDEX idx
