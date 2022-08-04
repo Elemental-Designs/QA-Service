@@ -3,13 +3,11 @@ const expect = require('chai').expect;
 
 describe("GET /questions", function () {
   it("returns questions from product id, limited to 5 per page", async function () {
-    const response = await request.get("/questions").query({product_id: 1});
+    const response = await request.get("/questions/").query({product_id: 1});
 
     expect(response.status).to.eql(200);
     expect(typeof(response.body)).to.eql('object');
     expect(response.body.result.length).to.eql(5);
-
-
 
   });
 });

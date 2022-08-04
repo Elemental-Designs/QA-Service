@@ -34,5 +34,4 @@ qaRouter.put('/answers/:answer_id/helpful', markAnswerHelpful);
 // put the answer as reported (/questions/:answer_id/report)
 qaRouter.put('/answers/:answer_id/report', reportAnswer);
 
-
 module.exports = qaRouter;

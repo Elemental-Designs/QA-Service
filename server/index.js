@@ -9,7 +9,7 @@ app.use(express.json());
 
 // set up routers
 app.use('/qa/questions', qaRouter);
-app.use('/qa', qaRouter);
+app.use('/qa', qaRouter)
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);

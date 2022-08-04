@@ -1,12 +1,23 @@
-const { Pool, Client } = require('pg')
+const { Pool } = require('pg')
 
-const client = new Client({
+const pool = new Pool ({
   user: 'jeromerodriguez',
   host: 'localhost',
   database: 'qa',
   password: 'psql',
 });
 
-client.connect();
-
-module.exports = (text, values) => client.query(text, values);
+module.exports = (text, values) => (
+  pool.connect()
+  .then(client => (
+    client.query(text, values)
+    .then(res => {
+      client.release();
+      return res;
+    })
+    .catch(err => {
+      client.release();
+      return Promise.reject(new Error(err));
+    })
+  ))
+);
