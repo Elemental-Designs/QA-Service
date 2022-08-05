@@ -22,4 +22,5 @@ module.exports = (text, values) => (
           return Promise.reject(new Error(err));
         })
     ))
+    .catch(err => console.error(err))
 );

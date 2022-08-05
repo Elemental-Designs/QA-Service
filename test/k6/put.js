@@ -32,4 +32,4 @@ export default function get() {
   }
 
   sleep(1);
-};
+}

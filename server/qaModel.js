@@ -1,5 +1,5 @@
 const query = require('../qa-db');
-
+require('dotenv').config();
 module.exports = {
 
   /* terminal query
