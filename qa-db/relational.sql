@@ -38,14 +38,14 @@ CREATE TABLE answers_photos (
 \COPY answers FROM 'qa_csv/answers.csv' DELIMITER ',' CSV HEADER;
 \COPY answers_photos FROM 'qa_csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
+-- RESETS COUNT FOR MAX ID WHEN INSERTING
+SELECT setval('questions_id_seq', (SELECT MAX(id) FROM questions)+1);
+SELECT setval('answers_id_seq', (SELECT MAX(id) FROM answers)+1);
+SELECT setval('answers_photos_id_seq', (SELECT MAX(id) FROM answers_photos)+1);
+
 -- INDICES FOR FK
-CREATE INDEX idx_answers_questions_id ON answers USING HASH(questions_id);
-CREATE INDEX idx_answers_photos_answers_id ON answers_photos USING HASH(answers_id);
+CREATE INDEX idx_answers_questions_id ON answers(questions_id);
+CREATE INDEX idx_answers_photos_answers_id ON answers_photos(answers_id);
 
 -- INDICES FOR FILTERING
-CREATE INDEX idx_question_reported ON questions USING HASH(reported);
-CREATE INDEX idx_question_product_id ON questions USING HASH(product_id);
-CREATE INDEX idx_answers_reported ON answers USING HASH(reported);
-
-
-
+CREATE INDEX idx_answers_product_id ON questions(product_id);

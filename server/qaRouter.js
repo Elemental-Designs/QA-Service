@@ -7,7 +7,7 @@ const {
   markQuestionHelpful,
   reportQuestion,
   markAnswerHelpful,
-  reportAnswer
+  reportAnswer,
 } = require('./qaController.js');
 
 // get list of questions (/questions)

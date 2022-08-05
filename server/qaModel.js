@@ -152,20 +152,20 @@ module.exports = {
   },
 
   /*
-  INSERT INTO questions(id, product_id, body, date_written, asker_name, asker_email)
-  VALUES((SELECT max(id + 1) FROM questions), 1, 'test questions', 234234514, 'test question name', 'testdmail@email.com')
+  INSERT INTO questions(body, date_written, asker_name, asker_email)
+  VALUES('test questions', 234234514, 'test question name', 'testdmail@email.com')
   */
   insertQuestion({ product_id, body, date, name, email }) {
     const text =`
-      INSERT INTO questions(id, product_id, body, date_written, asker_name, asker_email)
-      VALUES((SELECT max(id + 1) FROM questions),$1, $2, $3, $4, $5)
+      INSERT INTO questions(product_id, body, date_written, asker_name, asker_email)
+      VALUES($1, $2, $3, $4, $5)
     `;
     const values = [product_id, body, date, name, email];
     return query(text, values);
   },
 
 
-   /*
+  /*
   INSERT INTO answers(id, questions_id, body, date_written, answer_name, answer_email)
       VALUES((SELECT max(id + 1) from answers), 1, 'insert answer', 123412341, 'insert name', 'insert@email.com');
   INSERT INTO answers_photos(id, answers_id, url)
@@ -174,43 +174,43 @@ module.exports = {
 
   insertAnswer({ question_id, body, date, name, email, photos }) {
     const text =`
-      INSERT INTO answers(id, questions_id, body, date_written, answer_name, answer_email)
-      VALUES((SELECT max(id + 1) from answers), $1, $2, $3, $4, $5)
+      INSERT INTO answers(questions_id, body, date_written, answer_name, answer_email)
+      VALUES($1, $2, $3, $4, $5)
       RETURNING id
     `;
     const values = [question_id, body, date, name, email];
     const photoText = `
-      INSERT INTO answers_photos(id, answers_id, url)
-      VALUES ((SELECT max(id + 1) FROM answers_photos), $1, $2)
+      INSERT INTO answers_photos(answers_id, url)
+      VALUES ($1, $2)
     `;
     return query(text, values)
-    .then(({rows}) => {
+      .then(({rows}) => {
         if (photos.length > 0) {
           for (let i = 0; i < photos.length; i++) {
-            console.log(photos[i])
-            query(photoText, [rows[0].id, photos[i]])
+            console.log(photos[i]);
+            query(photoText, [rows[0].id, photos[i]]);
           }
         }
-      })
+      });
   },
 
   updateQuestionHelpful(id) {
-    const text =`UPDATE questions SET helpful = helpful + 1 WHERE id = $1`;
+    const text ='UPDATE questions SET helpful = helpful + 1 WHERE id = $1';
     return query(text, [id]);
   },
 
   updateReportQuestion(id) {
-    const text =`UPDATE questions SET reported = true WHERE id = $1`;
+    const text ='UPDATE questions SET reported = true WHERE id = $1';
     return query(text, [id]);
   },
 
   updateAnswerHelpful(id) {
-    const text =`UPDATE answers SET helpful = helpful + 1 WHERE id = $1`;
+    const text ='UPDATE answers SET helpful = helpful + 1 WHERE id = $1';
     return query(text, [id]);
   },
 
   updateReportAnswer(id) {
-    const text =`UPDATE answers SET reported = true WHERE id = $1`;
+    const text ='UPDATE answers SET reported = true WHERE id = $1';
     return query(text, [id]);
   }
-}
+};
