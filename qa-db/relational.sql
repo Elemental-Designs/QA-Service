@@ -1,20 +1,4 @@
-DROP TABLE product, questions, answers, answers_photos;
-
--- CREATE TABLE temp (
---   id INTEGER PRIMARY KEY,
---   name VARCHAR(100),
---   slogan VARCHAR(255),
---   description TEXT,
---   category VARCHAR(50),
---   default_price INTEGER,
---   UNIQUE(id)
--- );
-
--- CREATE TABLE product (
---   id SERIAL UNIQUE PRIMARY KEY,
---   name VARCHAR(100),
---   UNIQUE(id)
--- );
+DROP TABLE questions, answers, answers_photos;
 
 CREATE TABLE questions (
   id SERIAL UNIQUE PRIMARY KEY NOT NULL,
@@ -25,9 +9,6 @@ CREATE TABLE questions (
   asker_email VARCHAR(50) NOT NULL,
   reported BOOLEAN NOT NULL DEFAULT FALSE,
   helpful INTEGER NOT NULL DEFAULT 0
-  -- CONSTRAINT fk_product
-  --   FOREIGN KEY(product_id)
-  --     REFERENCES product(id)
 );
 
 CREATE TABLE answers (
@@ -53,16 +34,18 @@ CREATE TABLE answers_photos (
       REFERENCES answers(id)
 );
 
--- \COPY temp FROM 'qa_csv/product.csv' DELIMITER ',' CSV HEADER;
-
--- INSERT INTO product(id, name)
--- SELECT id, name
--- FROM temp;
-
--- DROP TABLE temp;
-
 \COPY questions FROM 'qa_csv/questions.csv' DELIMITER ',' CSV HEADER;
 \COPY answers FROM 'qa_csv/answers.csv' DELIMITER ',' CSV HEADER;
 \COPY answers_photos FROM 'qa_csv/answers_photos.csv' DELIMITER ',' CSV HEADER;
 
-CREATE INDEX idx
+-- INDICES FOR FK
+CREATE INDEX idx_answers_questions_id ON answers USING HASH(questions_id);
+CREATE INDEX idx_answers_photos_answers_id ON answers_photos USING HASH(answers_id);
+
+-- INDICES FOR FILTERING
+CREATE INDEX idx_question_reported ON questions USING HASH(reported);
+CREATE INDEX idx_question_product_id ON questions USING HASH(product_id);
+CREATE INDEX idx_answers_reported ON answers USING HASH(reported);
+
+
+

@@ -34,7 +34,6 @@ module.exports = {
   LIMIT 5
   */
   readQuestions({ product_id, page, count }) {
-    console.log('hi');
     const text = `
     SELECT product_id,
       (
@@ -66,6 +65,7 @@ module.exports = {
                   )
                   FROM answers AS a
                   WHERE a.questions_id = q.id
+                  AND a.reported = false
                 )
                 ,'{}'
               )
@@ -151,7 +151,10 @@ module.exports = {
     return query(text, values);
   },
 
-
+  /*
+  INSERT INTO questions(id, product_id, body, date_written, asker_name, asker_email)
+  VALUES((SELECT max(id + 1) FROM questions), 1, 'test questions', 234234514, 'test question name', 'testdmail@email.com')
+  */
   insertQuestion({ product_id, body, date, name, email }) {
     const text =`
       INSERT INTO questions(id, product_id, body, date_written, asker_name, asker_email)
@@ -160,6 +163,14 @@ module.exports = {
     const values = [product_id, body, date, name, email];
     return query(text, values);
   },
+
+
+   /*
+  INSERT INTO answers(id, questions_id, body, date_written, answer_name, answer_email)
+      VALUES((SELECT max(id + 1) from answers), 1, 'insert answer', 123412341, 'insert name', 'insert@email.com');
+  INSERT INTO answers_photos(id, answers_id, url)
+      VALUES ((SELECT max(id + 1) FROM answers_photos), (SELECT max(id) FROM answers), 'PICTURE URL');
+  */
 
   insertAnswer({ question_id, body, date, name, email, photos }) {
     const text =`

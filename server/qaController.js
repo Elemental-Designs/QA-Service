@@ -17,6 +17,7 @@ module.exports = {
   // get list of questions (/questions)
   getQuestions(req, res) {
     if (!req.query.product_id) handleError(res, 'invalid product_id')
+    debugger;
 
     let params = {
       product_id: req.query.product_id,
