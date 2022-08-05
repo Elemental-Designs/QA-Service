@@ -48,4 +48,5 @@ CREATE INDEX idx_answers_questions_id ON answers(questions_id);
 CREATE INDEX idx_answers_photos_answers_id ON answers_photos(answers_id);
 
 -- INDICES FOR FILTERING
+
 CREATE INDEX idx_answers_product_id ON questions(product_id);

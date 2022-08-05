@@ -36,7 +36,7 @@ export default function get() {
 
   const responses = http.batch([
     ['POST', `${BASE_URL}/qa/questions`, questionParams, null],
-    // ['POST', `${BASE_URL}/qa/questions/1/answers`, answerParams, null]
+    ['POST', `${BASE_URL}/qa/questions/1/answers`, answerParams, null]
   ]);
 
   for (let i = 0; i < responses.length; i++) {
