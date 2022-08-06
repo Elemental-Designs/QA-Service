@@ -10,6 +10,10 @@ app.use(express.json());
 app.use('/qa/questions', qaRouter);
 app.use('/qa', qaRouter);
 
+app.get(`/${process.env.LOADERIO}`, (req, res) => {
+  res.send(`${process.env.LOADERIO}`);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT);
 console.log(`Server listening at http://localhost:${PORT}`);

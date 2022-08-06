@@ -1,10 +1,15 @@
 {
-  "name": "elemental-designs",
+  "name": "elemental-designs-qa-service",
   "version": "1.0.0",
   "main": "server/index.js",
   "scripts": {
     "server-dev": "npx nodemon --watch server server/index.js",
     "start": "node server/index.js"
+  },
+  "author": "Jerome Rodriguez",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elemental-Designs/QA-service"
   },
   "dependencies": {
     "axios": "^0.27.2",
