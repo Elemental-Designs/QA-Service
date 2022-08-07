@@ -12,17 +12,31 @@
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) 
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
 
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Questions & Answers Performance](#questions--answers-performance)
+
 ## Project Overview
 
 > Service to store and retrieve Questions & Answers data
 
-<!-- <img src="/repo/qaDiagram.png" alt="drawing" width="90%"/> -->
+<img src="/repo/qaDiagram.png" alt="drawing" width="70%"/>
 
-![Service Diagram](/repo/qaDiagram.png)
+<img src="/repo/LoadBalancerDiagram.png" alt="drawing" width="70%"/>
+
+<!--- ![Service Diagram](/repo/qaDiagram.png)
+
+![Load Balancer Diagram](/repo/LoadBalancerDiagram.png)
+
+1 Server & 1 Database            |  Load Balancer w/ 2 Servers 
+  :-------------------------:|:-------------------------:
+  ![Service Diagram](/repo/qaDiagram.png)  |  ![Load Balancer Diagram](/repo/LoadBalancerDiagram.png)
+  
+ --->
 
 ***
 
-# Q&A Performance
+# Questions & Answers Performance
 
 ## Questions Get Request Performance
 
