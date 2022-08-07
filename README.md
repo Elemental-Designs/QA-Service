@@ -44,7 +44,7 @@
     
   Before             |  After 
   :-------------------------:|:-------------------------:
-  before  |  after
+  ![Before Load Balancing](/repo/getQuestionMax.png)  |  ![afterLoadBalancing](/repo/getQLoadBalancer.png)
   
   * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
