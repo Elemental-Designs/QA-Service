@@ -36,7 +36,7 @@
   
   * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
-    > RPS: 1600 clinets/sec over 1 minute
+    > RPS: 1600 clients/sec over 1 minute
     
     > Response Time: 79ms
     
@@ -54,6 +54,10 @@
     
     > Error Rate:
 
+  |   Max   |
+  |  :---:  |
+  |  **Figure 1.**  |
+
 ## Answers Get Request Performance
 
   * Before - Utilizing 1 Server Instance & 1 DBMS Instance
@@ -67,7 +71,7 @@
   * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
  
-    > RPS: 1600 clinets/sec over 1 minute
+    > RPS: 1500 clients/sec over 1 minute
     
     > Response Time: 82ms
     
@@ -85,20 +89,9 @@
     
     > Error Rate:
 
-
-
-
-<!-- <details><summary><b>Optimizations</b></summary>
-
-<br/>
-
->User can infinitely scroll through the main slide or mini carousel
-
->Provides a smooth experience for clients rendering accurate images before and after selected photo
-
-![slides](https://imgur.com/jN3CsN2.gif)
-
-</details> -->
+  |   Max   |
+  |  :---:  |
+  |  **Figure 1.**  |
 
 ***
 
