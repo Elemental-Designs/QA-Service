@@ -22,23 +22,76 @@
 
 ***
 
-# Service
-- [Questions & Answers Service](#questions--answers-service)
+# Q&A Performance
 
-## Questions & Answers Service
+## Questions Get Request Performance
 
+  * Before - Utilizing 1 Server Instance & 1 DBMS Instance
+  
+    > Max RPS: 1600 clients/sec over 1 minute
+    
+    > Response Time: 1986ms 
+    
+    > Error Rate: 0%
+  
+  * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+    > RPS: 1600 clients/sec over 1 minute
+    
+    > Response Time: 79ms
+    
+    > Error Rate: 0%
+    
+  Before             |  After 
+  :-------------------------:|:-------------------------:
+  before  |  after
+  
+  * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+    > RPS:
+    
+    > Response Time:
+    
+    > Error Rate:
 
-<details><summary><b>Optimizations</b></summary>
+  |   Max   |
+  |  :---:  |
+  |  **Figure 1.**  |
 
-<br/>
+## Answers Get Request Performance
 
->User can infinitely scroll through the main slide or mini carousel
+  * Before - Utilizing 1 Server Instance & 1 DBMS Instance
+  
+    > Max RPS: 1500 clients/sec over 1 minute
+    
+    > Response Time: 1989ms 
+    
+    > Error Rate: 0%
+  
+  * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+ 
+    > RPS: 1500 clients/sec over 1 minute
+    
+    > Response Time: 82ms
+    
+    > Error Rate: 0.1%
+    
+  Before             |  After 
+  :-------------------------:|:-------------------------:
+  before  |  after
+  
+  * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+    > RPS:
+    
+    > Response Time:
+    
+    > Error Rate:
 
->Provides a smooth experience for clients rendering accurate images before and after selected photo
-
-![slides](https://imgur.com/jN3CsN2.gif)
-
-</details>
+  |   Max   |
+  |  :---:  |
+  |  **Figure 1.**  |
 
 ***
 
@@ -46,5 +99,6 @@
 
 ### Jerome Rodriguez
 
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/) 
+[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jeromemtrodriguez/)
+
 [![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/JeromeMTR)
