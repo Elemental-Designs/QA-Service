@@ -22,9 +22,6 @@
 
 ***
 
-# Service
-- [Questions & Answers Service](#questions--answers-service)
-
 ## Questions & Answers Service
 
 
