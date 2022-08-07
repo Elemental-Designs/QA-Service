@@ -22,51 +22,68 @@
 
 ***
 
-## Questions & Answers Service
+# Q&A Performance
 
-#### Questions Get Request Performance
+## Questions Get Request Performance
 
   * Before - Utilizing 1 Server Instance & 1 DBMS Instance
   
-    - Max RPS: 1600 clients/sec over 1 minute
+    > Max RPS: 1600 clients/sec over 1 minute
     
-    - Response Time: 1986ms 
+    > Response Time: 1986ms 
     
-    - Error Rate: 0%
+    > Error Rate: 0%
   
   * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
-    - RPS: 1600 clinets/sec over 1 minute
+    > RPS: 1600 clinets/sec over 1 minute
     
-    - Response Time: 79ms
+    > Response Time: 79ms
     
-    - Error Rate: 0%
+    > Error Rate: 0%
     
   Before             |  After 
   :-------------------------:|:-------------------------:
   before  |  after
+  
+  * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+    > RPS:
+    
+    > Response Time:
+    
+    > Error Rate:
 
-#### Answers Get Request Performance
+## Answers Get Request Performance
 
   * Before - Utilizing 1 Server Instance & 1 DBMS Instance
   
-    - Max RPS: 1500 clients/sec over 1 minute
+    > Max RPS: 1500 clients/sec over 1 minute
     
-    - Response Time: 1989ms 
+    > Response Time: 1989ms 
     
-    - Error Rate: 0%
+    > Error Rate: 0%
   
   * After - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
-    - RPS: 1600 clinets/sec over 1 minute
+ 
+    > RPS: 1600 clinets/sec over 1 minute
     
-    - Response Time: 82ms
+    > Response Time: 82ms
     
-    - Error Rate: 0.1%
+    > Error Rate: 0.1%
     
   Before             |  After 
   :-------------------------:|:-------------------------:
   before  |  after
+  
+  * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
+  
+    > RPS:
+    
+    > Response Time:
+    
+    > Error Rate:
 
 
 
