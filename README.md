@@ -20,7 +20,10 @@
 
 > Initially implemented service to replace API and query from a Relational Database (PostgreSQL)
 
+> Service initially handled 100 Clients per second with a response time of 62ms 
+
 > Optimized and horizantally scaled service to handle webscale traffic up to 2000 Clients per second with a response time of 98ms
+
 
 ### Initial Service Diagram 
 <img src="/repo/qaDiagram.png" alt="drawing" width="70%"/>
