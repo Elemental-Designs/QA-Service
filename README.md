@@ -14,7 +14,7 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Performance & Optimizations](#performance--otpimizations)
+- [Performance & Optimizations](#performance--optimizations)
 
 ## Project Overview
 
