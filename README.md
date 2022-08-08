@@ -14,7 +14,7 @@
 
 ## Table of Contents
 - [Project Overview](#project-overview)
-- [Questions & Answers Performance](#questions--answers-performance)
+- [Performance & Optimizations](#performance--otpimizations)
 
 ## Project Overview
 
@@ -41,7 +41,7 @@
 
 ***
 
-# Questions & Answers Performance
+# Performance & Optimizations
 
 ## Requesting to Retrieve Questions Performance
 
