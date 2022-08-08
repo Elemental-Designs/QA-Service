@@ -22,7 +22,7 @@
 
 > Service initially handled 100 Clients per second with a response time of 62ms 
 
-> Optimized and horizantally scaled service to handle webscale traffic up to 2000 Clients per second with a response time of 98ms
+> Optimized and horizontally scaled service to handle web scale traffic up to 2000 Clients per second with a response time of 98ms
 
 
 ### Initial Service Diagram 
