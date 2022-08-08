@@ -62,15 +62,15 @@
   
   * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
-    > RPS:
+    > RPS: 2000 clients/sec over 1 minute
     
-    > Response Time:
+    > Response Time: 144ms
     
-    > Error Rate:
+    > Error Rate: 0.1%
 
   |   Max   |
   |  :---:  |
-  |  **Figure 1.**  |
+  |  ![Service Diagram](/repo/maxQLoadBalancer.png)  |
 
 ## Answers Get Request Performance
 
@@ -97,15 +97,15 @@
   
   * Max RPS - Utilizing a Load Balancer Instance with 2 Server Instances & 1 DBMS Instance
   
-    > RPS:
+    > RPS: 2000 clients/sec over 1 minute
     
-    > Response Time:
+    > Response Time: 98ms
     
-    > Error Rate:
+    > Error Rate: 0.1%
 
   |   Max   |
   |  :---:  |
-  |  **Figure 1.**  |
+  |  ![Service Diagram](/repo/maxALoadBalancer.png)  |
 
 ***
 
