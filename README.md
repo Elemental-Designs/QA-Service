@@ -18,10 +18,15 @@
 
 ## Project Overview
 
-> Service to store and retrieve Questions & Answers data
+> Initially implemented service to replace API and query from a Relational Database (PostgreSQL)
 
+> Optimized and horizantally scaled service to handle webscale traffic up to 2000 Clients per second
+
+### Initial Service Diagram 
 <img src="/repo/qaDiagram.png" alt="drawing" width="70%"/>
 
+
+### Integrating Load Balancer Diagram
 <img src="/repo/LoadBalancerDiagram.png" alt="drawing" width="70%"/>
 
 <!--- ![Service Diagram](/repo/qaDiagram.png)
@@ -38,7 +43,7 @@
 
 # Questions & Answers Performance
 
-## Questions Get Request Performance
+## Requesting to Retrieve Questions Performance
 
   * Before - Utilizing 1 Server Instance & 1 DBMS Instance
   
@@ -72,7 +77,7 @@
   |  :---:  |
   |  ![Service Diagram](/repo/maxQLoadBalancer.png)  |
 
-## Answers Get Request Performance
+## Requesting To Retrieve Answers Performance
 
   * Before - Utilizing 1 Server Instance & 1 DBMS Instance
   
