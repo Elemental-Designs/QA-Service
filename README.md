@@ -18,7 +18,9 @@
 
 ## Project Overview
 
-> Initially implemented service to replace API and query from a Relational Database (PostgreSQL)
+> Initially implemented service to replace API and query from a Relational Database
+
+> Handled & ETL 10 million rows of data into Postgres
 
 > Service initially handled 100 Clients per second with a response time of 62ms 
 
