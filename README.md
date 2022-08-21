@@ -119,7 +119,7 @@
 
 ***
 
-# Contributors
+# Contributor
 
 ### Jerome Rodriguez
 
